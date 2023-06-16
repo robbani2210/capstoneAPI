@@ -1,0 +1,28 @@
+from fastapi import APIRouter, Body, File, UploadFile, Form
+from fastapi.encoders import jsonable_encoder
+import fileinput
+from utils.gcs_storage import GCStorage
+
+from models.response import(
+    ErrorResponseModel,
+    ResponseModel
+)
+
+router = APIRouter()
+
+@router.post("/",response_description="post image file")
+async def uploadImage(username: str = Form(...), image_1 : UploadFile=File(...), 
+                                                 image_2 : UploadFile=File(...),
+						 image_3 : UploadFile=File(...),
+						 image_4 : UploadFile=File(...),
+						 image_5 : UploadFile=File(...)):
+    file_path_1 = GCStorage().upload_file(image_1)
+    file_path_2 = GCStorage().upload_file(image_2) 
+    file_path_3 = GCStorage().upload_file(image_3) 
+    file_path_4 = GCStorage().upload_file(image_4) 
+    file_path_5 = GCStorage().upload_file(image_5) 
+    return{
+        "upload file":file_path_1,
+        "upload file":file_path_1
+	"upload file":file_path_1
+"upload file":file_path_1
